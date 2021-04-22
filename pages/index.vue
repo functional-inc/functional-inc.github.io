@@ -108,102 +108,75 @@
         <h2 class="text-center">お問い合わせ</h2>
         <div class="row">
           <div class="col-md-8 offset-md-2">
-            <form class="form1 mt-5" id="contact_form">
+            <b-form class="form1 mt-5" id="contact_form" @submit="formConfirm">
               <div class="mt-4">
-                <label for="form_name" class="form-label">お名前 *</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="form_name"
-                  value=""
-                  required
-                />
+                <b-form-group label="お名前 *" label-for="form_name">
+                  <b-form-input
+                    id="form_name"
+                    v-model="form.name"
+                    required
+                  ></b-form-input>
+                </b-form-group>
               </div>
               <div class="mt-4">
-                <label for="form_email" class="form-label"
-                  >メールアドレス *</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  id="form_email"
-                  value=""
-                  required
-                />
+                <b-form-group label="メールアドレス *" label-for="form_email">
+                  <b-form-input
+                    id="form_email"
+                    v-model="form.email"
+                    required
+                  ></b-form-input>
+                </b-form-group>
               </div>
               <div class="mt-4">
-                <label for="form_tel" class="form-label"
-                  >電話番号（任意）</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="form_tel"
-                  value=""
-                />
+                <b-form-group label="電話番号（任意）" label-for="form_tel">
+                  <b-form-input id="form_tel" v-model="form.tel"></b-form-input>
+                </b-form-group>
               </div>
               <div class="mt-4">
-                <label for="form_title" class="form-label">タイトル *</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="form_title"
-                  value=""
-                  required
-                />
+                <b-form-group label="タイトル *" label-for="form_title">
+                  <b-form-input
+                    id="form_title"
+                    v-model="form.title"
+                    required
+                  ></b-form-input>
+                </b-form-group>
               </div>
               <div class="mt-4">
-                <label for="form_body" class="form-label">本文 *</label>
-                <textarea
-                  class="form-control"
-                  id="form_body"
-                  rows="5"
-                  required
-                ></textarea>
+                <b-form-group label="本文 *" label-for="form_body">
+                  <b-form-textarea
+                    id="form_body"
+                    v-model="form.body"
+                    rows="5"
+                    required
+                  ></b-form-textarea>
+                </b-form-group>
               </div>
               <div class="mt-5 text-center">
-                <button type="submit" class="btn btn-success">確認</button>
+                <b-button type="submit" class="btn-success">確認</b-button>
               </div>
-            </form>
+            </b-form>
           </div>
         </div>
       </div>
       <!-- .container -->
     </section>
-    <div class="modal" id="confirm_modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">以下の内容でよろしいですか？</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p id="confirm_text" style="white-space: pre-wrap"></p>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              キャンセル
-            </button>
-            <button type="button" class="btn btn-primary" id="submit_button">
-              送信
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <b-modal
+      ref="confirm-modal"
+      id="confirm_modal"
+      title="以下の内容でよろしいですか？"
+      cancel-title="キャンセル"
+      ok-title="送信"
+      @ok="formSubmit"
+      ><p>
+        お名前: {{ form.name }}<br />
+        メールアドレス: {{ form.email }}<br />
+        電話番号: {{ form.tel }}<br />
+        タイトル: {{ form.title }}<br />
+        本文: {{ form.body }}
+      </p></b-modal
+    >
 
-    <div class="modal" id="result_modal" tabindex="-1" role="dialog">
+    <b-modal id="result_modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -231,62 +204,30 @@
           </div>
         </div>
       </div>
-    </div>
+    </b-modal>
   </main>
 </template>
 <script lang="ts">
 import Vue from "vue";
 
 export default Vue.extend({
-  mounted() {
-    // $(function () {
-    //   $(contact_form).on("submit", function (event) {
-    //     event.preventDefault();
-    //     showConfirmModal(getFormText());
-    //   });
-    //   $(submit_button).on("click", function () {
-    //     const base64URL =
-    //       "aHR0cHM6Ly9ob29rcy5zbGFjay5jb20vc2VydmljZXMvVDAxOEdDVjNNQlAvQjAxVFRHMUNEQTkvRklvQmsweEV3cndUUWYxUjZqOHpGZ1NX";
-    //     const url = atob(base64URL);
-    //     $.ajax({
-    //       url,
-    //       type: "POST",
-    //       dataType: "text",
-    //       data: JSON.stringify({ text: getFormText() }),
-    //       timeout: 5000,
-    //     })
-    //       .done(function (data) {
-    //         $(confirm_modal).modal("hide");
-    //         showResultModal(
-    //           `送信を完了しました。\n\n【送信内容】\n${getFormText()}`
-    //         );
-    //         $(contact_form)[0].reset();
-    //       })
-    //       .fail(function () {
-    //         $(confirm_modal).modal("hide");
-    //         showResultModal(
-    //           "エラーが発生しました。\nしばらく時間が経ってからもう一度お試しください。"
-    //         );
-    //       });
-    //   });
-    //   function getFormText() {
-    //     return [
-    //       `お名前: ${$("#form_name").val()}`,
-    //       `メールアドレス: ${$("#form_email").val()}`,
-    //       `電話番号: ${$("#form_tel").val()}`,
-    //       `タイトル: ${$("#form_title").val()}`,
-    //       `本文: ${$("#form_body").val()}`,
-    //     ].join("\n");
-    //   }
-    //   function showConfirmModal(text) {
-    //     $(confirm_text).text(text);
-    //     $(confirm_modal).modal();
-    //   }
-    //   function showResultModal(text) {
-    //     $(result_text).text(text);
-    //     $(result_modal).modal();
-    //   }
-    // });
+  data: () => ({
+    form: {
+      name: "",
+      email: "",
+      tel: "",
+      body: "",
+    },
+  }),
+  mounted() {},
+  methods: {
+    formConfirm(event) {
+      event.preventDefault();
+      this.$refs["confirm-modal"].show();
+    },
+    formSubmit() {
+      console.log("test");
+    },
   },
 });
 </script>
