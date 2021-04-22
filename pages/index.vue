@@ -221,12 +221,29 @@ export default Vue.extend({
   }),
   mounted() {},
   methods: {
-    formConfirm(event) {
+    formConfirm(event: Event) {
       event.preventDefault();
+      // @ts-ignore
       this.$refs["confirm-modal"].show();
     },
     formSubmit() {
-      console.log("test");
+      const base64URL =
+        "aHR0cHM6Ly9ob29rcy5zbGFjay5jb20vc2VydmljZXMvVDAxOEdDVjNNQlAvQjAxVFRHMUNEQTkvRklvQmsweEV3cndUUWYxUjZqOHpGZ1NX";
+      const url = atob(base64URL);
+
+      this.$axios
+        .$post(url, {
+          data: {
+            name: this.form.name,
+          },
+        })
+        .catch((error) => {
+          if (this.$axios.isCancel(error)) {
+            console.log("Request canceled", error);
+          } else {
+            // handle error
+          }
+        });
     },
   },
 });
