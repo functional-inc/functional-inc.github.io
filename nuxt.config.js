@@ -1,10 +1,6 @@
 export default {
   ssr: false,
-  css: [
-    "~/assets/css/bootstrap.min",
-    "~/assets/css/queries",
-    "~/assets/css/style",
-  ],
+  css: ["~/assets/css/queries", "~/assets/css/style"],
   head: {
     title: "トップページ | 株式会社functional",
     htmlAttrs: {
@@ -44,4 +40,5 @@ export default {
     ],
   },
   buildModules: ["@nuxt/typescript-build"],
+  plugins: ["~/plugins/bootstrap-vue.ts"],
 };
