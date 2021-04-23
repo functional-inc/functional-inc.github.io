@@ -175,36 +175,30 @@
         本文: {{ form.body }}
       </p></b-modal
     >
-
-    <b-modal id="result_modal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">送信結果</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p id="result_text" style="white-space: pre-wrap"></p>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              OK
-            </button>
-          </div>
-        </div>
-      </div>
-    </b-modal>
+    <b-modal
+      ref="succes-modal"
+      id="succes_modal"
+      title="送信結果"
+      :ok-only="true"
+      ><p>
+        送信を完了しました。<br /><br />
+        【送信内容】<br />
+        お名前: {{ form.name }}<br />
+        メールアドレス: {{ form.email }}<br />
+        電話番号: {{ form.tel }}<br />
+        タイトル: {{ form.title }}<br />
+        本文: {{ form.body }}
+      </p></b-modal
+    >
+    <b-modal
+      ref="failed-modal"
+      id="failed_modal"
+      title="送信結果"
+      :ok-only="true"
+      ><p>
+        エラーが発生しました。<br />しばらく時間が経ってからもう一度お試しください。
+      </p></b-modal
+    >
   </main>
 </template>
 <script lang="ts">
@@ -216,10 +210,23 @@ export default Vue.extend({
       name: "",
       email: "",
       tel: "",
+      title: "",
       body: "",
     },
+    submitedResultText: "",
   }),
   mounted() {},
+  computed: {
+    formText() {
+      const formText =
+        `お名前: ${this.form.name}\n` +
+        `メールアドレス: ${this.form.email}\n` +
+        `電話番号: ${this.form.tel}\n` +
+        `タイトル: ${this.form.title}\n` +
+        `本文: ${this.form.body}`;
+      return formText;
+    },
+  },
   methods: {
     formConfirm(event: Event) {
       event.preventDefault();
@@ -231,18 +238,25 @@ export default Vue.extend({
         "aHR0cHM6Ly9ob29rcy5zbGFjay5jb20vc2VydmljZXMvVDAxOEdDVjNNQlAvQjAxVFRHMUNEQTkvRklvQmsweEV3cndUUWYxUjZqOHpGZ1NX";
       const url = atob(base64URL);
 
-      this.$axios
-        .$post(url, {
-          data: {
-            name: this.form.name,
-          },
+      const data = JSON.stringify({
+        text: this.formText,
+      });
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors",
+        body: data,
+      })
+        .then(() => {
+          // @ts-ignore
+          this.$refs["succes-modal"].show();
         })
-        .catch((error) => {
-          if (this.$axios.isCancel(error)) {
-            console.log("Request canceled", error);
-          } else {
-            // handle error
-          }
+        .catch(() => {
+          // @ts-ignore
+          this.$refs["failed-modal"].show();
         });
     },
   },

@@ -40,7 +40,5 @@ export default {
     ],
   },
   buildModules: ["@nuxt/typescript-build"],
-  modules: ["@nuxtjs/axios"],
-  axios: {},
   plugins: ["~/plugins/bootstrap-vue.ts"],
 };
