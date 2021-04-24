@@ -247,7 +247,7 @@ export default Vue.extend({
         headers: {
           "Content-Type": "application/json",
         },
-        mode: "no-cors",
+        mode: "cors",
         body: data,
       })
         .then(() => {
