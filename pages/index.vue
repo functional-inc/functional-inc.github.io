@@ -244,10 +244,10 @@ export default Vue.extend({
 
       fetch(url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         mode: "cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
         body: data,
       })
         .then(() => {
