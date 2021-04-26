@@ -1,5 +1,6 @@
 {
   "name": "my-app",
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
