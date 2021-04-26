@@ -10,7 +10,9 @@
   "dependencies": {
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
-    "nuxt": "^2.15.4"
+    "nuxt": "^2.15.4",
+    "sass": "^1.32.11",
+    "sass-loader": "^10.1.1"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.4",
