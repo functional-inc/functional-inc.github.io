@@ -15,7 +15,7 @@
     "sass": "^1.32.11",
     "sass-loader": "^10.1.1",
     "vue": "^2.5.18",
-    "webpack": "^5.35.1"
+    "webpack": "^4.46.0"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.4",
