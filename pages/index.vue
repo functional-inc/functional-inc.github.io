@@ -44,6 +44,12 @@
     <section id="sec4">
       <div class="container">
         <h2 class="text-center">
+          技術ブログ
+        </h2>
+        <router-link to="/posts">
+          記事一覧ページ
+        </router-link>
+        <h2 class="text-center">
           採用情報
         </h2>
         <p class="lead text-center font-weight-normal" />
