@@ -17,7 +17,7 @@ import { createClient } from '~/plugins/contentful.js'
 const client = createClient()
 
 export default {
-  asyncData ({ env }) {
+  asyncData ({ env }: { env: any}) {
     return Promise.all([
       client.getEntries({
         content_type: env.CTF_BLOG_POST_TYPE_ID,
