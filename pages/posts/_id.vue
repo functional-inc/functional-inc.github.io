@@ -2,6 +2,7 @@
   <div>
     <h1>{{ post.fields.title }}</h1>
     <p>作成日時:{{ post.sys.createdAt }}</p>
+    <img :src="heroImgURL">
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-html="body" />
   </div>
@@ -29,13 +30,17 @@ export default Vue.extend({
   },
   data: () => ({
     post: {} as Entry<any>,
-    body: ''
+    body: '',
+    heroImgURL: ''
   }),
   mounted () {
-    const rawRichTextField = this.post.fields.body
-    const renderedHtml = marked(rawRichTextField)
+    const rawMarkDown = this.post.fields.body
+    const renderedHtml = marked(rawMarkDown)
     const renderedHtmlsanitized = DOMPurify.sanitize(renderedHtml)
     this.body = renderedHtmlsanitized
+
+    const heroImage = this.post.fields.heroImage
+    this.heroImgURL = `${heroImage.fields.file.url}?w=800&h=800`
   }
 })
 </script>
