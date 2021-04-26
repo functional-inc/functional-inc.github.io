@@ -242,6 +242,8 @@ export default Vue.extend({
         text: this.formText,
       });
 
+      // slackの webhook を利用した際に、CORS制限で投稿が出来ない。
+      // https://qiita.com/shu-prog/items/75c48dc45c5839cf88ed
       fetch(url, {
         method: "POST",
         mode: "cors",
