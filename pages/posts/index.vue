@@ -1,14 +1,17 @@
 <template>
   <div>
+    <h1>投稿記事一覧</h1>
     <ul>
       <li v-for="(post,index) in posts" :key="index">
-        {{ post.fields.title }}
+        <router-link :to="'/posts/' + post.sys.id">
+          {{ post.fields.title }}
+        </router-link>
       </li>
     </ul>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { createClient } from '~/plugins/contentful.js'
 
 const client = createClient()
