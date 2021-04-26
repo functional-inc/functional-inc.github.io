@@ -39,6 +39,6 @@ export default {
       },
     ],
   },
-  buildModules: ["@nuxt/typescript-build"],
+  buildModules: ["@nuxtjs/eslint-module", "@nuxt/typescript-build"],
   plugins: ["~/plugins/bootstrap-vue.ts"],
 };
