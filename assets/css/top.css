@@ -110,7 +110,7 @@ body {
   top: 0;
   right: 0;
   width: 83.3333333333vw;
-  margin-top: 83.3333333333vw;
+  margin-top: 80.0740740741vw;
   margin-right: -3.7037037037vw;
 }
 
@@ -378,6 +378,7 @@ body {
   font-size: 5.5555555556vw;
   font-weight: bold;
   color: #5dc1cf;
+  white-space: nowrap;
 }
 
 .p-company-flow__img {
@@ -579,9 +580,8 @@ body {
 .p-contact-form__ttl {
   width: 40%;
   height: 8.3333333333vw;
-  padding: 10px;
+  line-height: 8.3333333333vw;
   padding-left: 20px;
-  margin-top: 0;
   font-size: 3.4074074074vw;
   font-weight: bold;
   color: #fff;
@@ -1135,7 +1135,7 @@ body {
     font-size: 14px;
     height: 6.1rem;
     margin-top: 0;
-    line-height: 4rem;
+    line-height: 6.1rem;
   }
   .p-contact-form__input {
     margin-bottom: 0;

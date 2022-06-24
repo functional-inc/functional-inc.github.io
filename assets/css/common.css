@@ -42,6 +42,9 @@ img {
 
 input,
 textarea {
+  -webkit-appearance: none;
+  border-radius: 0;
+  margin: 0;
   font: inherit;
 }
 
