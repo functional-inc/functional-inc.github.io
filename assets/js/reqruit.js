@@ -4,7 +4,7 @@
     return `お名前: ${name} \n\nフリガナ: ${hurigana} \n\n電話番号: ${tel} \n\nメールアドレス: ${email} \n\n誕生日: ${birthday} \n\n性別: ${gender} \n\n経験年数: ${experience} \n\n質問: ${comment}`;
   }
   entrySubmitBtn.addEventListener("click", () => {
-    const slackURL = "https://hooks.slack.com/services/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";
+    const slackURL = atob("aHR0cHM6Ly9ob29rcy5zbGFjay5jb20vc2VydmljZXMvVDAxOEdDVjNNQlAvQjAzS0pNRDBCRlYvYTlmeU54U2MwTGhHNVk5dEtOd1BNZk93");
     const hurigana = document.getElementById("hurigana").value;
     const name = document.getElementById("name").value;
     const tel = document.getElementById("tel").value;
