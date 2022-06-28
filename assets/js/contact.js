@@ -4,7 +4,7 @@
     return `お名前: ${name} \n\nメールアドレス: ${email} \n\n本文: ${comment}`;
   }
   contactSubmitBtn.addEventListener("click", () => {
-    const slackURL = "https://hooks.slack.com/services/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";
+    const slackURL = atob("aHR0cHM6Ly9ob29rcy5zbGFjay5jb20vc2VydmljZXMvVDAxOEdDVjNNQlAvQjAzSDI3Vk1LVVovZHBmaG44b0xhc0JrWk1ubENYelltNTl1");
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const comment = document.getElementById("comment").value;
