@@ -15,7 +15,6 @@
     const comment = document.getElementById("comment").value;
 
     const data = { text: getEntryFormText(hurigana, name, tel, email, birthday, gender, experience, comment) };
-    debugger;
     if (hurigana && name && tel && email && birthday && gender && experience) {
       $.ajax({
         type: "POST",
